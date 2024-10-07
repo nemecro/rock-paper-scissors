@@ -1,9 +1,17 @@
 function getComputerChoice() {
     // randomly return "rock", "paper" or "scissors"
     // generate a random number ranging from 1 to 3
+    let randomNumber = getRandomIntInclusive(1, 3);
     // if the generated random number is 1, return "rock"
     // if the generated random number is 2, return "paper"
     // if the generated random number is 3, return "scissors"
+    if (randomNumber === 1){
+        return "rock";
+    } else if (randomNumber === 2){
+        return "paper";
+    } else {
+        return "scissors";
+    }
 }
 
 function getRandomIntInclusive(min, max) {
@@ -14,3 +22,4 @@ function getRandomIntInclusive(min, max) {
 
 // TESTS
 console.log(getRandomIntInclusive(1, 3));
+console.log(getComputerChoice());
