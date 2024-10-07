@@ -74,12 +74,20 @@ function playGame(){
         }
     }
 
-    playRound(getUserChoice(), getComputerChoice());
-    console.log(`User win: ${humanScore}, computer win: ${computerScore}`);
+    // play five rounds
+    let n = 0;
+    while (n < 5){
+        playRound(getUserChoice(), getComputerChoice());
+        console.log(`User win: ${humanScore}, computer win: ${computerScore}`);
+        n++;
+    }
 }
+
+playGame();
+
 // TESTS
 
 // console.log(getRandomIntInclusive(1, 3));
 // console.log(getComputerChoice());
 // console.log(getUserChoice());
-playGame();
+
