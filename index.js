@@ -1,3 +1,7 @@
+// GLOBAL VARIABLES to track the score
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
     // randomly return "rock", "paper" or "scissors"
     // generate a random number ranging from 1 to 3
