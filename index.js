@@ -35,12 +35,47 @@ function getUserChoice(){
         alert("You entered an invalid choice, choose again");
         getUserChoice();
     }
+    // make choice case insensitive
+    choice = choice.toLowerCase();
     // return valid choice
     return choice;
 }
 
+function playRound(humanChoice, computerChoice){
+    // take two arguments respective for human and computer choice
+    let winner = getWinner(humanChoice, computerChoice);
+    if (winner === "human"){
+        // if winner is human, increment humanScore
+        humanScore++;
+    } else if (winner === "computer"){
+        // if winner is computer, increment computerScore
+        computerScore++;
+    }
+    // if a tie, don't increment
+}
+
+function getWinner(humanChoice, computerChoice){
+    // this function checks the winner in each round
+    // returns the winner as a string
+    if (humanChoice === "rock" && computerChoice === "scissors" || 
+        humanChoice === "paper" && computerChoice === "rock" || 
+        humanChoice === "scissors" && computerChoice === "paper"){
+            // if human is "rock" AND computer is "scissors"
+            // if human is "paper" AND computer is "rock"
+            // if human is "scissors" AND computer is "paper"
+            return "human";
+    } else if (humanChoice === computerChoice) {
+        // if human AND computer are EQUAL 
+        return "tie";
+    } else {
+        return "computer";
+    }
+}
+
 // TESTS
 
-console.log(getRandomIntInclusive(1, 3));
-console.log(getComputerChoice());
-console.log(getUserChoice());
+// console.log(getRandomIntInclusive(1, 3));
+// console.log(getComputerChoice());
+// console.log(getUserChoice());
+playRound(getUserChoice(), getComputerChoice());
+console.log(`User win: ${humanScore}, computer win: ${computerScore}`);
