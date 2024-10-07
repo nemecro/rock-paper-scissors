@@ -17,9 +17,26 @@ function getComputerChoice() {
 function getRandomIntInclusive(min, max) {
     // take two integers to set the range boundary and generate a random number inclusive the boundary points
     return Math.round(Math.random() * (max - min) + min);
-    // return Math.floor(Math.random() * (max - min + 1) + min); // + 1 causes the max number to be inclusive, since floor returns LESS THAN or EQUAL TO
+    /*
+    ALTERNATIVE CODE FOR THE FUNCTION PER MDN
+    return Math.floor(Math.random() * (max - min + 1) + min);
+    */
+}
+
+function getUserChoice(){
+    // get user's choice via prompt
+    let choice = prompt("Enter your choice: [rock, paper, scissors]");
+    // if the user's choice is neither of the allowed strings, run the function again
+    if (choice !== "rock" && choice !== "paper" && choice !== "scissors"){
+        alert("You entered an invalid choice, choose again");
+        getUserChoice();
+    }
+    // return valid choice
+    return choice;
 }
 
 // TESTS
+
 console.log(getRandomIntInclusive(1, 3));
 console.log(getComputerChoice());
+console.log(getUserChoice());
