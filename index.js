@@ -17,6 +17,11 @@ function getComputerChoice() {
 }
 
 function playGame(){
+    // display result
+    const resultDisplay = document.querySelector('#result');
+    const mainElem = document.querySelector('main');
+    const winnerAnnouncement = document.createElement('p');
+
     // VARIABLES to track the score
     let humanScore = 0;
     let computerScore = 0;
@@ -42,9 +47,19 @@ function playGame(){
         } else if (winner === "computer"){
             computerScore++;
         }
+        resultDisplay.textContent = `Human score: ${humanScore}, computer score ${computerScore}`;
         console.log(`Human choice: ${humanChoice}, computer choice: ${computerChoice} \n Human score: ${humanScore}, computer score ${computerScore}`);
-        // if a tie, don't increment
+        
+        function displayWinner(winner){
+            winnerAnnouncement.textContent = `${winner} has won!`;
+            mainElem.appendChild(winnerAnnouncement);
+        }
+        if (humanScore >= 5){
+            displayWinner(humanScore);
 
+        } else if (computerScore >= 5){
+            displayWinner(computerScore);
+        }
     }
 
     // get user's choice via the button clicked
