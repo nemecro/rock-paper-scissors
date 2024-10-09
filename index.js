@@ -40,8 +40,11 @@ let computerScore = 0;
 function playGame(humanChoice, computerChoice){
     function displayPlayAgain(){
         const playAgainDiv = document.createElement('div');
+        playAgainDiv.id = "play-again";
         playAgainDiv.textContent = 'Play again?';
         const playAgainButton = document.createElement('button');
+        playAgainButton.classList.add("selection");
+        playAgainButton.classList.add("play-again-button");
         playAgainButton.textContent = 'RESET';
         playAgainDiv.appendChild(playAgainButton);
         document.body.appendChild(playAgainDiv);
