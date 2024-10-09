@@ -38,6 +38,22 @@ let humanScore = 0;
 let computerScore = 0;
 
 function playGame(humanChoice, computerChoice){
+    function displayPlayAgain(){
+        const playAgainDiv = document.createElement('div');
+        playAgainDiv.textContent = 'Play again?';
+        const playAgainButton = document.createElement('button');
+        playAgainButton.textContent = 'RESET';
+        playAgainDiv.appendChild(playAgainButton);
+        document.body.appendChild(playAgainDiv);
+        playAgainButton.addEventListener('click', () => {
+            playAgainDiv.remove();
+            humanScore = 0;
+            computerScore = 0;
+            resultDisplay.textContent = `Human score: ${humanScore}, computer score ${computerScore}`;
+            winnerAnnouncement.remove();
+        })
+    }
+
     function playRound(){
         // take two arguments respective for human and computer choice
         let winner = getWinner(humanChoice, computerChoice);
@@ -50,8 +66,10 @@ function playGame(humanChoice, computerChoice){
         console.log(`Human choice: ${humanChoice}, computer choice: ${computerChoice} \n Human score: ${humanScore}, computer score ${computerScore}`);
         if (humanScore == 5){
             displayTotalWinner("Human");
+            displayPlayAgain();
         } else if (computerScore == 5){
             displayTotalWinner("Computer");
+            displayPlayAgain();
         }
     }
 
