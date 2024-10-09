@@ -16,17 +16,55 @@ function getComputerChoice() {
     }
 }
 
-function playGame(){
-    // display result
-    const resultDisplay = document.querySelector('#result');
-    const mainElem = document.querySelector('main');
-    const winnerAnnouncement = document.createElement('p');
+const resultDisplay = document.querySelector('#result');
+const mainElem = document.querySelector('main');
+const winnerAnnouncement = document.createElement('p');
+// get user's choice via the button clicked
+const gameButtons = document.querySelectorAll('.selection');
+gameButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (button.id == "rock"){
+            playGame("rock", getComputerChoice());
+        } else if (button.id == "paper"){
+            playGame("paper", getComputerChoice());
+        } else {
+            playGame("scissors", getComputerChoice());
+        }
+    });
+});
 
-    // VARIABLES to track the score
-    let humanScore = 0;
-    let computerScore = 0;
+// VARIABLES to track the score
+let humanScore = 0;
+let computerScore = 0;
 
-    function getWinner(humanChoice, computerChoice){
+function playGame(humanChoice, computerChoice){
+    function playRound(){
+        // take two arguments respective for human and computer choice
+        let winner = getWinner(humanChoice, computerChoice);
+        if (winner === "human"){
+            humanScore++;
+        } else if (winner === "computer"){
+            computerScore++;
+        }
+        resultDisplay.textContent = `Human score: ${humanScore}, computer score ${computerScore}`;
+        console.log(`Human choice: ${humanChoice}, computer choice: ${computerChoice} \n Human score: ${humanScore}, computer score ${computerScore}`);
+        if (humanScore == 5){
+            displayTotalWinner("Human");
+        } else if (computerScore == 5){
+            displayTotalWinner("Computer");
+        }
+    }
+
+    function displayTotalWinner(winner){
+        winnerAnnouncement.textContent = `${winner} has won!`;
+        mainElem.appendChild(winnerAnnouncement);
+    }
+
+    if (humanScore < 5 && computerScore < 5){
+        playRound();
+    }
+
+    function getWinner(){
         // this function checks the winner in each round
         if (humanChoice === "rock" && computerChoice === "scissors" || 
             humanChoice === "paper" && computerChoice === "rock" || 
@@ -38,43 +76,6 @@ function playGame(){
             return "computer";
         }
     }
-
-    function playRound(humanChoice, computerChoice){
-        // take two arguments respective for human and computer choice
-        let winner = getWinner(humanChoice, computerChoice);
-        if (winner === "human"){
-            humanScore++;
-        } else if (winner === "computer"){
-            computerScore++;
-        }
-        resultDisplay.textContent = `Human score: ${humanScore}, computer score ${computerScore}`;
-        console.log(`Human choice: ${humanChoice}, computer choice: ${computerChoice} \n Human score: ${humanScore}, computer score ${computerScore}`);
-        
-        function displayWinner(winner){
-            winnerAnnouncement.textContent = `${winner} has won!`;
-            mainElem.appendChild(winnerAnnouncement);
-        }
-        if (humanScore >= 5){
-            displayWinner(humanScore);
-
-        } else if (computerScore >= 5){
-            displayWinner(computerScore);
-        }
-    }
-
-    // get user's choice via the button clicked
-    const gameButtons = document.querySelectorAll('.selection');
-    gameButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            if (button.id == "rock"){
-                playRound("rock", getComputerChoice());
-            } else if (button.id == "paper"){
-                playRound("paper", getComputerChoice());
-            } else {
-                playRound("scissors", getComputerChoice());
-            }
-        });
-    });
 }
 
 playGame();
